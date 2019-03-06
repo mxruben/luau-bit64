@@ -1,33 +1,45 @@
 lua-bit64
 =========
 
-Library for 64-bit operations in Lua.
+Lua library for bitwise operations on 64-bit integers.
+
+As of 2019-04-06, LuaJIT does not support native bit operations on 64-bit types. (source https://luajit.org/ext_ffi_semantics.html#status)
 
 ## API
 
-All binary operations only accept two arguments.
+The call semantics are the same as in the [Lua BitOp](http://bitop.luajit.org/) extension module.
 
 ```lua
-bit64.split(x) -- Splits a 64bit number to its hi/lo 32bits.
-bit64.join(a, b) -- Concatenates two Lua numbers into a 64-bit one.
-bit64.hi(x) -- Returns the hi 32-bits.
-bit64.lo(x) -- Returns the lo 32-bits.
-bit64.band(x1 [,x2...]) -- Bitwise AND
-bit64.bor(x1 [,x2...]) -- Bitwise OR
-bit64.bxor(x1 [,x2...]) -- Bitwise XOR
-bit64.bnot(x) -- Bitwise NOT
-bit64.lshift(x, n) -- Bitwise logical left-shift.
-bit64.rshift(x, n) -- Bitwise logical right-shift.
-bit64.arshift(x, n) -- Bitwise arithmetic right-shift.
-bit64.rol(x, n) -- Bitwise rotate left
-bit64.ror(x, n) -- Bitwise rorate right
-bit64.bswap(x) -- Endianness swapping.
-bit64.tohex(x [,n]) -- Converts a number to a string.
+a, b = bit64.split(x) -- Splits a 64-bit number to its hi/lo 32-bit components.
+y = bit64.join(a, b) -- Concatenates two Lua numbers into a 64-bit one.
+a = bit64.hi(x) -- Returns the hi 32-bits.
+b = bit64.lo(x) -- Returns the lo 32-bits.
+y = bit64.band(x1 [,x2...]) -- Bitwise AND of all its arguments.
+y = bit64.bor(x1 [,x2...]) -- Same for bitwise OR.
+y = bit64.bxor(x1 [,x2...]) -- Same for bitwise XOR.
+y = bit64.bnot(x) -- Bitwise NOT of its argument.
+y = bit64.lshift(x, n) -- Bitwise logical left-shift by n bits.
+y = bit64.rshift(x, n) -- Same for bitwise logical right-shift.
+y = bit64.arshift(x, n) -- Same for bitwise arithmetic right-shift.
+y = bit64.rol(x, n) -- Bitwise left rotation by n bits.
+y = bit64.ror(x, n) -- Same for bitwise right rotation.
+y = bit64.bswap(x) -- Swaps the bytes of its argument and returns it.
+y = bit64.tohex(x [,n]) -- Converts 1st arg to a hex string. 2nd arg is length.
 ```
 
-### Differences with the Lua BitOp module
+**Types**:
 
-[Lua BitOp](http://bitop.luajit.org/)
++ `a`, `b` and `n` always are Lua numbers.
++ `y` is always a 64-bit unsigned integer.
++ `x` can be a Lua number or a 64-bit integer (signed or unsigned).
+
+## Modifying & Testing
+
+The repository includes a C program that generates a test suite for the module. To run the tests make sure you have a C compiler and execute:
+
+```sh
+make test
+```
 
 ## License
 
