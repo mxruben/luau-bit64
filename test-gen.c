@@ -10,7 +10,6 @@
 
 #include <stdio.h>
 #include <inttypes.h>
-#include <byteswap.h>
 
 #define MACRO_BLOCK( body ) \
 do { body } while (0) //
@@ -80,7 +79,7 @@ uint64_t rotl(uint64_t v, int n) {
 #define arshift(x, n)   ((int64_t)x >> n)
 #define rol(x, n)       rotl(x, n)
 #define ror(x, n)       rotl(x, 64 - n)
-#define bswap(x)        bswap_64(x)
+#define bswap(x)        __builtin_bswap64(x)
 
 int main(void)
 {
