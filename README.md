@@ -1,9 +1,9 @@
 lua-bit64
 =========
 
-Lua library for bitwise operations on 64-bit integers.
+LuaJIT library for bitwise operations on 64-bit integers.
 
-As of 2019-04-06, LuaJIT does not support native bit operations on 64-bit types. (source https://luajit.org/ext_ffi_semantics.html#status)
+**NOTE** The `bit` libray in LuaJIT 2.1.0-beta3 supports 64-bit types (and JIT compiles them too!). This library is for older versions of LuaJIT.
 
 ## API
 
@@ -29,11 +29,11 @@ y = bit64.tohex(x [,n]) -- Converts 1st arg to a hex string. 2nd arg is length.
 
 **Types**:
 
-+ `a`, `b` and `n` always are Lua numbers.
-+ `y` is always a 64-bit unsigned integer.
++ `a`, `b` and `n` are Lua numbers.
++ `y` is a 64-bit unsigned integer.
 + `x` can be a Lua number or a 64-bit integer (signed or unsigned).
 
-## Modifying & Testing
+## Modifying & testing
 
 The repository includes a C program that generates a test suite for the module. To run the tests make sure you have a C compiler and execute:
 
