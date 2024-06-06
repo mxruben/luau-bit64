@@ -64,6 +64,8 @@ local function bxor(...: number): number
     return bop(bit32.bxor, ...)
 end
 
+--- Perform a bitwise and of all input numbers, and return true if the result is
+--- not 0. If the function is called with no arguments, true is returned.
 local function btest(...: number): boolean
     return band(...) ~= 0
 end
