@@ -73,11 +73,6 @@ local function bnot(n: number): number
     return join(bit32.bnot(high), bit32.bnot(low))
 end
 
-local function byteswap(n: number): number
-    local high, low = split(n)
-    return join(bit32.byteswap(low), bit32.byteswap(high))
-end
-
 local function lshift(n: number, i: number): number
     if bit32.band(i, 63) == 0 then
         return n
@@ -154,7 +149,6 @@ local bit64 = {
     arshift = arshift,
     lrotate = lrotate,
     rrotate = rrotate,
-    byteswap = byteswap,
     btest = btest,
 }
 
