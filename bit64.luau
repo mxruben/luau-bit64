@@ -19,7 +19,7 @@ end
 
 --- Splits a 64-bit integer into two 32-bit integers.
 local function split(n: number): (number, number)
-    return math.round(n / 0x100000000), n % 0x100000000
+    return n // 0x100000000, n % 0x100000000
 end
 
 --- Returns the least significant bits.
@@ -29,7 +29,7 @@ end
 
 --- Returns the most significant bits.
 local function high(n: number): number
-    return math.round(n / 0x100000000)
+    return n // 0x100000000
 end
 
 local function bop(op: (...number) -> number, n1: number, n2: number, ...: number): number
